@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro"
+import ServicesList  from "../../components/Services-list.astro";
+import ServicesIcons from "../../components/Services-icons.astro";
+import ContactServices from "../../components/Contact-services.astro";
+---
+
+  <Layout title="Asisjuridica | Area civil">
+    <Hero 
+    title1="Servicios"
+    title2="profesionales"
+    text="Soluciones legales responsables, eficientes y a la medida de tus necesidades."
+    haveButtons={false}
+    url="/images/header-asisjuridica-area-civil.jpg"
+    />
+    <ServicesList
+    list={["Asesoría jurídica, recuperación de cartera vigente, dudoso recaudo y castigada.",
+    "Auditoría y seguimiento de procesos jurídicos.",
+    "La elaboración de las minutas requeridas en cuanto a contratos de hipoteca, prendas, arrendamiento y entre otras dependiendo de la necesidad planteada por el cliente.",
+    "Propiedad horizontal.",
+    "Emisión de conceptos tendientes a resolver la problemática jurídica que se plantee.",
+    "Elaboración de manuales: <br/>-Sucesiones <br/> -Fraude a la sociedad conyugal"
+    ]}
+    title="Área civil"
+    image="/images/service-3.jpg"
+    />
+    <ContactServices />
+    <ServicesIcons />
+  </Layout>
+

@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro"
+import ServicesList  from "../../components/Services-list.astro";
+import ServicesIcons from "../../components/Services-icons.astro";
+import ContactServices from "../../components/Contact-services.astro";
+---
+
+  <Layout title="Asisjuridica | Area laboral">
+    <Hero 
+    title1="Servicios"
+    title2="profesionales"
+    text="Soluciones legales responsables, eficientes y a la medida de tus necesidades."
+    haveButtons={false}
+    url="/images/header-asisjuridica-area-laboral.jpg"
+    />
+    <ServicesList
+    list={["Elaboración y revisión de REGLAMENTO INTERNO DE TRABAJO",
+    "Elaboración y revisión del Manual de convivencia.",
+    "Elaboración y revisión dela contratación de empleados.",
+    "Emisión de conceptos y asesorías para aplicación de sanciones.",
+    "Acompañamiento y representación ante el Ministerio de Trabajo.",
+    "Elaboración y revisión del paquete de formatos laborales.",
+    "Acompañamiento y asesoría de reporte de accidentes laborales.",
+    "Implementación del reglamento de trabajo y el manual de convivencia.",
+    "Capacitaciones.",
+    "Asesoría en temas pensionales.",
+    "Demandas laborales de todo tipo (despido injusto, culpa patronal por la ocurrencia de accidente de trabajo o enfermedad laboral, no pago de prestaciones sociales, etc).",
+    ]}
+    title="Área laboral"
+    image="/images/service-2.jpg"
+    />
+    <ContactServices />
+    <ServicesIcons />
+  </Layout>
+

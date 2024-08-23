@@ -1,0 +1,105 @@
+---
+import logo from '../../public/images/logoasisfooter-1@2x.png';
+import whastsapp from '../../public/images/whatsapp-1@2x.png'
+
+const navItems = [
+  {
+    title: 'Inicio',
+    path: '/',
+    
+  },
+  { title: 'Nosotros', path: '/nosotros' },
+  {
+    title: 'Servicios',
+    path: '/',
+    subItems: [
+      { title: 'Area comercial', path: '/servicios/area-comercial' },
+      { title: 'Area laboral', path: '/servicios/area-laboral' },
+      { title: 'Area civil', path: '/servicios/area-civil' },
+      { title: 'Area administrativa', path: '/servicios/area-administrativa' },
+    ]
+  },
+  { title: 'Contacto', path: '/contacto' }
+];
+---
+<footer class="bg1">
+  <div class="section">
+  <div class="row5">
+    <div class="col4">
+      <img
+        class="logo-asis-footer-1-icon"
+        alt=""
+        src={logo.src}
+      />
+    </div>
+    <div class="col5">
+      <h3 class="menu-title">Menú</h3>
+      <div class="menu-footer">
+        <div id="nav">
+          {navItems.map((item, index) => (
+          <div id={`item-${index}`}>
+            <a href={item.path} >{item.title} </a> 
+            {item.subItems && (
+              <ul id={`submenu-${index}`} class="menu__sub11">
+                {item.subItems.map((subitem) => (
+                <li><a href={subitem.path}>{subitem.title}</a></li>
+                ))}
+              </ul>
+            )}
+            </div>
+        ))}
+      </div>
+      </div>
+    </div>
+    <div class="col7">
+      <h3 class="menu-title">Contáctenos</h3>
+      <div class="menu-footer">
+        <div class="info">
+          <div class="div6"><i class="fas fa-map-marker-alt"></i></div>
+          <div >
+            <p >Carrera 49 No 50- 30 Of. 505</p>
+            <p >Edif. Lucrecio Velez - Medellín</p>
+          </div>
+        </div>
+        <div class="info1">
+          <div class="div6"><i class="fas fa-envelope"></i></div>
+          <div >
+            asisjuridica19@gmail.com
+          </div>
+        </div>
+        <div class="info1">
+          <div class="div6"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            312 298 63 69
+          </div>
+        </div>
+        <div class="info1">
+          <img
+            class="whatsapp-1-icon"
+            alt=""
+            src={whastsapp.src}
+          />
+          <div>312 298 63 69</div>
+        </div>
+      </div>
+      <div class="socmed">
+        <div class="icon4">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="icon4">
+          <i class="fab fa-instagram"></i>
+        </div>
+        
+        <div class="icon4">
+          <i class="fab fa-linkedin-in"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copy">
+    <div class="border"></div>
+    <div class="attorni-all-rights">su wwweb</div>
+    <div class="border1"></div>
+  </div>
+  </div>
+</footer>

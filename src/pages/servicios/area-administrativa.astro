@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro"
+import ServicesList  from "../../components/Services-list.astro";
+import ServicesIcons from "../../components/Services-icons.astro";
+import ContactServices from "../../components/Contact-services.astro";
+---
+
+  <Layout title="Asisjuridica | Area administrativa">
+    <Hero 
+    title1="Servicios"
+    title2="profesionales"
+    text="Soluciones legales responsables, eficientes y a la medida de tus necesidades."
+    haveButtons={false}
+    url="/images/header-asisjuridica-area-administrativa.jpg"
+    />
+    <ServicesList
+    list={["Representación ante entidades del Estado como lo son COLPENSIONES Y UGPP entre otras.",
+    "Asesoría frente a requerimientos o reclamaciones realizados por entidades publicas.",
+    "Radicación de trámites administrativos",
+    "Presentación de recursos de reposición y apelación ante diferentes entidades",
+    "Demandas contra el Estado",
+    "Demandas de responsabilidad médica"
+    ]}
+    title="Área administrativa"
+    image="/images/service-4.jpg"
+    />
+    <ContactServices />
+    <ServicesIcons />
+  </Layout>
+

@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro"
+import ServicesList  from "../../components/Services-list.astro";
+import ServicesIcons from "../../components/Services-icons.astro";
+import ContactServices from "../../components/Contact-services.astro";
+---
+
+  <Layout title="Asisjuridica | Area comercial">
+    <Hero 
+    title1="Servicios"
+    title2="profesionales"
+    text="Soluciones legales responsables, eficientes y a la medida de tus necesidades."
+    haveButtons={false}
+    url="/images/header-asisjuridica-area-comercial.jpg"
+    />
+    <ServicesList
+    list={["Construcción de régimen y sociedades comerciales.",
+    "Partición y representación en juntas directivas.",
+    "Recuperación de cartera judicial y extrajudicial.",
+    "Estudio de títulos y crédito.",
+    "Reforma de estatutos.",
+    "Contratos comerciales.",
+    ]}
+    title="Área comercial"
+    image="/images/service-1.jpg"
+    />
+    <ContactServices />
+    <ServicesIcons />
+  </Layout>
+

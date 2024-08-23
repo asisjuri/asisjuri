@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --menu-link: Mulish;
+    --fontawesome: "Font Awesome 5 Free";
+    --font-font-awesome-5-brands: "Font Awesome 5 Brands";
+    --heading-2: Bitter;
+  
+    /* font sizes */
+    --mobile-size: 0.8rem;
+    --menu-link-size: 1rem;
+    --fontawesome-size: 0.8rem;
+    --small-text-size: 1rem;
+    --link-size: 1.2rem;
+    --heading-5-size: 1.5rem;
+    --heading-3-size: 2rem;
+    --heading-2-size: 3rem;
+    --heading-1-size: 4rem;
+  
+    /* Colors */
+    --light: #fff;
+    --color-midnightblue: #010066;
+    --primary: #c7a251;
+    --gray-1: #f1f5fa;
+    --gray-2: #828e9d;
+    --color-lightslategray-100: rgba(130, 142, 157, 0.1);
+    --dark-2: #555;
+    --dark-1: #151a21;
+    --color-gray-100: rgba(255, 255, 255, 0.1);
+    --tertiary: #ffeedd;
+    --secondary: #E3D1A8;
+  
+    /* Gaps */
+    --gap-45xl: 64px;
+    --gap-5xs: 8px;
+    --gap-13xl: 32px;
+    --gap-base: 16px;
+    --gap-3xs: 10px;
+    --gap-9xs: 4px;
+    --gap-21xl: 40px;
+  
+    /* Paddings */
+    --padding-35xl: 54px;
+    --padding-45xl: 64px;
+    --padding-base: 16px;
+    --padding-13xl: 32px;
+  
+    /* Border radiuses */
+    --br-81xl: 100px;
+  }
+  
