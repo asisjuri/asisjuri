@@ -16,55 +16,48 @@ import Hero from "../components/Hero.astro"
     <div class="col image__container">
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17935.323356651563!2d-74.66684633824978!3d5.472832442675917!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e40dec3eace4f95%3A0x131a4f68fdc86ce6!2sASISJURIDICA!5e0!3m2!1ses!2sco!4v1724243453259!5m2!1ses!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <div class="col services">
+    <div class="col ">
         <div class="title-section1">
           <div class="nosotros-parent">
-            <div class="nosotros">Servicios</div>
+            <div class="nosotros">Contáctenos</div>
             <div class="sub-child"></div>
           </div>
         </div>
-        <h4 class="services__title">Contáctenos</h4>
-        <div class="info-parent_dark">
-          <div class="info">
-            <div class="div6"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="hollywood-boulevard-los-container">
-              <p class="somos-una-firma">Carrera 49 No 50- 30 Of. 505</p>
-              <p class="edif-lucrecio">Edif. Lucrecio Velez - Medellín</p>
-            </div>
-          </div>
-          <div class="info1">
-            <div class="div6"><i class="fas fa-envelope"></i></div>
-            <div class="hollywood-boulevard-los-container">
-              asisjuridica19@gmail.com
-            </div>
-          </div>
-          <div class="info1">
-            <div class="div6"><i class="fas fa-phone-alt"></i></div>
-            <div class="hollywood-boulevard-los-container">
-              312 298 63 69
-            </div>
-          </div>
-          <div class="info3">
-            <img
-              class="whatsapp-1-icon"
-              alt=""
-              src="/images/whatsapp-1@2x.png"
-            />
+        <ul class="footer__contact">
+          <li class="footer__contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p >Carrera 49 No 50 - 30 Oficina 505<br/> Edif. Lucrecio Velez - Medellín</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <p>312 298 63 69</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p >Calle 17 No. 3 - 37 Oficina 110<br/>La Dorada - Caldas</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <p>57 - 606 - 8370807</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-envelope"></i>
+            <a class="footer_contact-a" href="mailto:asisjuridica19@gmail.com">asisjuridica19@gmail.com</a>
+          </li>
   
-            <div class="div10">021 3456 789</div>
-          </div>
-        </div>
-        <div class="socmed">
-          <div class="icon4">
-              <i class="fab fa-facebook-f"></i>
-          </div>
-          <div class="icon4">
-            <i class="fab fa-instagram"></i>
-          </div>
           
-          <div class="icon4">
+        </ul>
+        <div class="socmed">
+          <a href="https://www.facebook.com/asisju" target="_blank" class="icon4">
+              <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/asisjuridicasas/" target="_blank" class="icon4">
+            <i class="fab fa-instagram"></i>
+          </a>
+          
+          <!-- <div class="icon4">
             <i class="fab fa-linkedin-in"></i>
-          </div>
+          </div> -->
         </div>
     </div>
   </div>
@@ -73,12 +66,6 @@ import Hero from "../components/Hero.astro"
 <div class="section">
   <div class="flex__container">
     <div class="col services">
-        <div class="title-section1">
-          <div class="nosotros-parent">
-            <div class="nosotros">Contáctanos</div>
-            <div class="sub-child"></div>
-          </div>
-        </div>
         <h3 class="services__title">Hablemos de tu caso</h3>
         <p>Completa el formulario a continuación o contáctenos directamente para agendar una consulta.</p>
 

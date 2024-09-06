@@ -1,24 +1,25 @@
 ---
 const navItems = [
   {
-    title: 'Inicio',
-    path: '/',
-    
+    title: "Inicio",
+    path: "/",
   },
-  { title: 'Nosotros', path: '/nosotros' },
+  { title: "Nosotros", path: "/nosotros" },
   {
-    title: 'Servicios',
-    path: '/',
+    title: "Servicios",
+    path: "/",
     subItems: [
-      { title: 'Area comercial', path: '/servicios/area-comercial' },
-      { title: 'Area laboral', path: '/servicios/area-laboral' },
-      { title: 'Area civil', path: '/servicios/area-civil' },
-      { title: 'Area administrativa', path: '/servicios/area-administrativa' },
-    ]
+      { title: "Area comercial", path: "/servicios/area-comercial" },
+      { title: "Area laboral", path: "/servicios/area-laboral" },
+      { title: "Area civil", path: "/servicios/area-civil" },
+      { title: "Area administrativa", path: "/servicios/area-administrativa" },
+    ],
   },
-  { title: 'Contacto', path: '/contacto' }
+  { title: "Blog", path: "/blog" },
+  { title: "Contacto", path: "/contacto" },
 ];
 ---
+
 <div class="section">
   <div class="logo-asis-1-parent">
     <a href="/">
@@ -35,48 +36,47 @@ const navItems = [
         <span></span>
       </div>
       <div id="nav" class="menu__content">
-      {navItems.map((item, index) => (
-      <div id={`item-${index}`} class="menu__item">
-        <a href={item.path} >{item.title} </a> 
-        {item.subItems && (
-          <div id={`submenu-${index}`} class="menu__sub">
-            {item.subItems.map((subitem) => (
-            <a href={subitem.path}>{subitem.title}</a> 
-            ))}
-          </div>
-        )}
-        </div>
-    ))}
-
-    </div>
-  </nav>
+        {
+          navItems.map((item, index) => (
+            <a id={`item-${index}`} class="menu__item" href={item.path}>
+              {item.title}
+              {item.subItems && (
+                <div id={`submenu-${index}`} class="menu__sub">
+                  {item.subItems.map((subitem) => (
+                    <a href={subitem.path}>{subitem.title}</a>
+                  ))}
+                </div>
+              )}
+            </a>
+          ))
+        }
+      </div>
+    </nav>
   </div>
 </div>
 
 <script is:inline>
-document.querySelectorAll('.menu__item').forEach((item, index) => {
-  item.addEventListener('click', function(e) {
-    const submenu = document.getElementById(`submenu-${index}`);
-    
-    // Verificar si el elemento tiene un submenú
-    if (submenu) {
-      e.preventDefault();  // Bloquear la navegación solo si hay un submenú
-      submenu.classList.toggle('active');
-    }
+  document.querySelectorAll(".menu__item").forEach((item, index) => {
+    item.addEventListener("click", function (e) {
+      const submenu = document.getElementById(`submenu-${index}`);
+      if (submenu) {
+        e.preventDefault();
+        submenu.classList.toggle("active");
+      }
+    });
   });
-});
 
-document.querySelectorAll('.menu__sub a').forEach((submenuItem) => {
-  submenuItem.addEventListener('click', function(e) {
-    e.stopPropagation();  // Evitar que el clic en el submenú cierre el submenú
+  document.querySelectorAll(".menu__sub a").forEach((submenuItem) => {
+    submenuItem.addEventListener("click", function (e) {
+      e.stopPropagation(); // Evitar que el clic en el submenú cierre el submenú
+    });
   });
-});
 
-const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById("hamburger");
+  const nav = document.getElementById("nav");
 
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    hamburger.classList.toggle('open');
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    hamburger.classList.toggle("open");
   });
 </script>

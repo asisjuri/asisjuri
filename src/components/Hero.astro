@@ -1,47 +1,50 @@
 ---
 interface Props {
-
-	title1: string;
-    title2?: string;
-	subTitle?: string;
-    text: string
-	haveButtons: boolean;
-  url: string
+  title1?: string;
+  title2?: string;
+  subTitle?: string;
+  text?: string;
+  haveButtons: boolean;
+  url: string;
 }
 
 const { title1, title2, subTitle, text, haveButtons, url } = Astro.props;
 ---
 
 <div class="hero">
-  
   <img class="linier-icon" alt="" src={url} />
   <div class="section">
-
     <div class="hero__container">
-      <div class="sub">
-          {subTitle}
-        <div class="sub-child"></div>
-      </div>
+      {
+        subTitle && (
+          <div class="sub">
+            {subTitle}
+            <div class="sub-child" />
+          </div>
+        )
+      }
       <b class="porque-cada-caso-container">
-        <p class="porque-cada-caso">{title1}</p>
-        <p class="porque-cada-caso">{title2}</p>
+        {title1 && <p class="porque-cada-caso">{title1}</p>}
+        {title2 && <p class="porque-cada-caso">{title2}</p>}
       </b>
       <div class="soluciones-legales-responsable-parent">
-        <div class="soluciones-legales-responsable">
-         {text}
-        </div>
-        {haveButtons && (
-        <div class="row">
-          <div class="buttonprimary btn1">
-            <a href="/contacto">CONTACTO</a>
-          </div>
-          <div class="buttonprimary btn2">
-           <img src="/images/whatsapp.png" alt="whatsap">
-            <a href="https://wa.me/573122986369" target="_blank">312 298 63 69</a>
-          </div>
-        </div>
-        )}
+        {text && <div class="soluciones-legales-responsable">{text}</div>}
+        {
+          haveButtons && (
+            <div class="rowpage">
+              <div class="buttonprimary btn1">
+                <a href="/contacto">CONTACTO</a>
+              </div>
+              <div class="buttonprimary btn2">
+                <img src="/images/whatsapp.png" alt="whatsap" />
+                <a href="https://wa.me/573122986369" target="_blank">
+                  312 298 63 69
+                </a>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
-    </div>
   </div>
+</div>

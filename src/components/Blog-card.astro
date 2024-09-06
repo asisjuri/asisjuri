@@ -1,0 +1,87 @@
+---
+import { getPosts, getImage } from "../services/blogwp";
+import { formatDate } from "../utils/functions";
+
+type Post = {
+  id: number;
+  date: string;
+  slug: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  featured_media: number;
+  image?: string;
+};
+
+let posts: Post[] = [];
+let isLoading = true;
+let error = null;
+
+try {
+  posts = await getPosts();
+
+  for (const post of posts) {
+    try {
+      const image = await getImage(post.featured_media);
+      post.image = image; // Agregar la imagen al objeto del post
+    } catch (err: any) {
+      console.error(
+        `Error al obtener la imagen para el post ${post.id}: `,
+        err.message,
+      );
+    }
+  }
+} catch (err: any) {
+  error = err.message;
+} finally {
+  isLoading = false;
+}
+
+// Definir el número de posts por página
+---
+
+{isLoading && <p>Loading...</p>}
+
+{error && <p>Error: {error}</p>}
+
+{
+  !isLoading && !error && (
+    <div>
+      {posts.map((post: any) => (
+        <div class="bsingle__post mb-50">
+          <div class="bsingle__post-thumb">
+            <img src={post.image} alt="" />
+          </div>
+          <div class="bsingle__content">
+            <div class="admin">
+              <i class="fal fa-calendar-alt" /> {formatDate(post.date)}
+            </div>
+            <div class="meta-info">
+              <ul>
+                <li>
+                  <i class="fal fa-eye" /> 100 Views
+                </li>
+
+                <li>
+                  <i class="far fa-user" />
+                  por equipo Asisjuridica
+                </li>
+              </ul>
+            </div>
+
+            <h2>
+              <a href={`/blog/${post.slug}`}>{post.title.rendered}</a>
+            </h2>
+            <Fragment set:html={post.excerpt.rendered} />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+<!-- <div class="pagination">
+  {currentPage > 1 && <a href={`/page/${currentPage - 1}`}>Anterior</a>}
+  {
+    currentPage < totalPages && (
+      <a href={`/page/${currentPage + 1}`}>Siguiente</a>
+    )
+  } -->

@@ -1,0 +1,31 @@
+---
+import Layout from "./Layout.astro";
+import BlogCategories from "../components/Blog-categories.astro";
+import BlogLatest from "../components/Blog-latest.astro";
+import BlogTags from "../components/Blog-tags.astro";
+
+import "../styles/style.css";
+---
+
+<Layout title="Asisjuridica | Blog">
+  <slot name="hero" />
+  <section class="inner-blog pt-120 pb-105 s-brl">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <br />
+          <slot name="content" />
+        </div>
+        <!-- #right side -->
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <aside class="sidebar-widget">
+            <BlogCategories />
+            <BlogLatest />
+            <BlogTags />
+          </aside>
+        </div>
+        <!-- #right side end -->
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,19 @@
+---
+import { getCategories } from "../services/blogwp";
+let { cat } = Astro.props;
+cat = await getCategories();
+---
+
+<section id="categories-1" class="widget widget_categories">
+  <h2 class="widget-title">Categorías</h2>
+  <ul>
+    {
+      cat.map((c) => (
+        <li class="cat-item cat-item-16">
+          <a href="#">{c.name}</a>
+          {c.count}
+        </li>
+      ))
+    }
+  </ul>
+</section>

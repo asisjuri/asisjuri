@@ -1,0 +1,21 @@
+---
+import { getPosts } from "../services/blogwp";
+import { formatDate } from "../utils/functions";
+let { latestPost } = Astro.props;
+const post = await getPosts();
+latestPost = post.slice(0, 3);
+---
+
+<section id="recent-posts-4" class="widget widget_recent_entries">
+  <h2 class="widget-title">Artículos recientes</h2>
+  <ul>
+    {
+      latestPost.map((post) => (
+        <li>
+          <a href={`blog/${post.slug}`}>{post.title.rendered}</a>
+          <span class="post-date">{formatDate(post.date)}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

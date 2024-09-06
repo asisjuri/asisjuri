@@ -1,105 +1,115 @@
 ---
-import logo from '../../public/images/logoasisfooter-1@2x.png';
-import whastsapp from '../../public/images/whatsapp-1@2x.png'
+import logo from "../../public/images/logoasisfooter-1@2x.png";
 
 const navItems = [
   {
-    title: 'Inicio',
-    path: '/',
-    
+    title: "Inicio",
+    path: "/",
   },
-  { title: 'Nosotros', path: '/nosotros' },
+  { title: "Nosotros", path: "/nosotros" },
+  { title: "Contacto", path: "/contacto" },
   {
-    title: 'Servicios',
-    path: '/',
+    title: "Servicios",
+    path: "/",
     subItems: [
-      { title: 'Area comercial', path: '/servicios/area-comercial' },
-      { title: 'Area laboral', path: '/servicios/area-laboral' },
-      { title: 'Area civil', path: '/servicios/area-civil' },
-      { title: 'Area administrativa', path: '/servicios/area-administrativa' },
-    ]
+      { title: "Area comercial", path: "/servicios/area-comercial" },
+      { title: "Area laboral", path: "/servicios/area-laboral" },
+      { title: "Area civil", path: "/servicios/area-civil" },
+      { title: "Area administrativa", path: "/servicios/area-administrativa" },
+    ],
   },
-  { title: 'Contacto', path: '/contacto' }
+  { title: "Blog", path: "/blog" },
 ];
 ---
+
 <footer class="bg1">
   <div class="section">
-  <div class="row5">
-    <div class="col4">
-      <img
-        class="logo-asis-footer-1-icon"
-        alt=""
-        src={logo.src}
-      />
-    </div>
-    <div class="col5">
-      <h3 class="menu-title">Menú</h3>
-      <div class="menu-footer">
-        <div id="nav">
-          {navItems.map((item, index) => (
-          <div id={`item-${index}`}>
-            <a href={item.path} >{item.title} </a> 
-            {item.subItems && (
-              <ul id={`submenu-${index}`} class="menu__sub11">
-                {item.subItems.map((subitem) => (
-                <li><a href={subitem.path}>{subitem.title}</a></li>
-                ))}
-              </ul>
-            )}
-            </div>
-        ))}
+    <div class="footer__container">
+      <div class="footer__item">
+        <img class="logo-asis-footer-1-icon" alt="" src={logo.src} />
       </div>
+      <div class="footer__item footer__item-left">
+        <h3 class="footer__title">Menú</h3>
+        <ul id="nav" class="footer__nav">
+          {
+            navItems.map((item, index) => (
+              <li class="footer__nav-item" id={`item-${index}`}>
+                <a href={item.path}>{item.title} </a>
+                {item.subItems && (
+                  <ul id={`submenu-${index}`} class="footer__nav-sub">
+                    {item.subItems.map((subitem) => (
+                      <li>
+                        <a href={subitem.path}>{subitem.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ul>
       </div>
-    </div>
-    <div class="col7">
-      <h3 class="menu-title">Contáctenos</h3>
-      <div class="menu-footer">
-        <div class="info">
-          <div class="div6"><i class="fas fa-map-marker-alt"></i></div>
-          <div >
-            <p >Carrera 49 No 50- 30 Of. 505</p>
-            <p >Edif. Lucrecio Velez - Medellín</p>
-          </div>
-        </div>
-        <div class="info1">
-          <div class="div6"><i class="fas fa-envelope"></i></div>
-          <div >
-            asisjuridica19@gmail.com
-          </div>
-        </div>
-        <div class="info1">
-          <div class="div6"><i class="fas fa-phone-alt"></i></div>
-          <div>
-            312 298 63 69
-          </div>
-        </div>
-        <div class="info1">
-          <img
-            class="whatsapp-1-icon"
-            alt=""
-            src={whastsapp.src}
-          />
-          <div>312 298 63 69</div>
-        </div>
-      </div>
-      <div class="socmed">
-        <div class="icon4">
+      <div class="footer__item footer__item-left">
+        <h3 class="footer__title">Contáctenos</h3>
+        <ul class="footer__contact">
+          <li class="footer__contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>
+              Carrera 49 No 50 - 30 Oficina 505<br /> Edif. Lucrecio Velez - Medellín
+            </p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <p>312 298 63 69</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>Calle 17 No. 3 - 37 Oficina 110<br />La Dorada - Caldas</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <p>57 - 606 - 8370807</p>
+          </li>
+          <li class="footer__contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:asisjuridica19@gmail.com"
+              >asisjuridica19@gmail.com</a
+            >
+          </li>
+        </ul>
+        <div class="socmed">
+          <a
+            href="https://www.facebook.com/asisju"
+            target="_blank"
+            class="icon4"
+          >
             <i class="fab fa-facebook-f"></i>
-        </div>
-        <div class="icon4">
-          <i class="fab fa-instagram"></i>
-        </div>
-        
-        <div class="icon4">
+          </a>
+          <a
+            href="https://www.instagram.com/asisjuridicasas/"
+            target="_blank"
+            class="icon4"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <!-- <div class="icon4">
           <i class="fab fa-linkedin-in"></i>
+        </div> -->
         </div>
       </div>
     </div>
+    <div class="copy">
+      <div class="border"></div>
+      <a href="https://suwwweb.com/" target="_blank" class="attorni-all-rights"
+        >hecho por <img src="/images/suwwweb.png" alt="suweb" /></a
+      >
+      <div class="border1"></div>
+    </div>
   </div>
-  <div class="copy">
-    <div class="border"></div>
-    <div class="attorni-all-rights">su wwweb</div>
-    <div class="border1"></div>
-  </div>
+  <div class="footer__whatsapp glow-button">
+    <a href="https://wa.me/573122986369" target="_blank">
+      <img src="/images/w-float.png" alt="hablemos por whatsapp" />
+    </a>
   </div>
 </footer>
