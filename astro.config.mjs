@@ -1,7 +1,6 @@
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 // Exporta la configuración básica
-import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,7 +8,7 @@ export default defineConfig({
   site: 'https://asisjuridica.com',
   // Cambia esto por el URL de tu sitio
 
-  output: 'server',
+  output: 'static',
 
   // Configura el output directory para los archivos generados
   outDir: './dist',

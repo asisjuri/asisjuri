@@ -838,9 +838,11 @@ z-index: -1;
 }
 .logo-asis-1-parent {
   display: flex;
-  padding: var(--gap-base);
+  padding: var(--gap-base) var(--gap-13xl);
   justify-content: space-between;
   color: var(--color-midnightblue);
+  max-width: 1260px;
+  margin: auto;
 }
 
 .flex__container {
@@ -1159,9 +1161,6 @@ footer {
   padding-bottom: var(--gap-base);
 }
 
-.footer__nav {
-
-}
 
 .footer__nav li {
   padding: var(--gap-5xs) 0;
@@ -1449,4 +1448,14 @@ footer {
   line-height: 30px;
   margin: 0;
   padding: 20px;
+}
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+li {
+	list-style: none
+}
+a:hover {
+  color: #b68c5a;
 }

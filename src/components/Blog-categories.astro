@@ -1,6 +1,14 @@
 ---
 import { getCategories } from "../services/blogwp";
-let { cat } = Astro.props;
+
+interface Category {
+  id: number;
+  name: string;
+  count: number;
+  slug: string;
+}
+
+let { cat } = Astro.props as { cat: Category[] };
 cat = await getCategories();
 ---
 
@@ -10,7 +18,7 @@ cat = await getCategories();
     {
       cat.map((c) => (
         <li class="cat-item cat-item-16">
-          <a href="#">{c.name}</a>
+          <a href={`/blog/categoria/${c.slug}`}>{c.name}</a>
           {c.count}
         </li>
       ))

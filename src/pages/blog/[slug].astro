@@ -1,35 +1,108 @@
 ---
-import { getPosts, getImage } from "../../services/blogwp";
+import { wpquery } from "../../graphql/wordPressQuery";
 import Hero from "../../components/Hero.astro";
 import { formatDate } from "../../utils/functions";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 
-const { slug } = Astro.params;
-let { image } = Astro.props;
-
-let res = await fetch(
-  `https://asisjuridica.com/admin/wp-json/wp/v2/posts?slug=${slug}`,
-);
-let [post] = await res.json();
-
-// The getStaticPaths() is required for static Astro sites.
-// If using SSR, you will not need this function.
-export async function getStaticPaths() {
-  let posts = await getPosts();
-
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post: post },
-  }));
+interface FeaturedImageNode {
+  mediaItemUrl: string;
+  srcSet: string;
+  sizes: string;
+  altText: string;
 }
 
-image = await getImage(post.featured_media);
+interface FeaturedImage {
+  node: FeaturedImageNode;
+}
+
+// Interface para el autor
+interface AuthorNode {
+  name: string;
+}
+
+interface Author {
+  node: AuthorNode;
+}
+
+// Interface para el post
+interface PostNode {
+  slug: string;
+  date: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  author: Author;
+  featuredImage: FeaturedImage;
+}
+
+// Interface para el contenedor de nodos de posts
+interface Posts {
+  nodes: PostNode[];
+}
+
+// Interface para la respuesta principal
+interface GraphQLResponse {
+  posts: Posts;
+}
+
+export async function getStaticPaths() {
+  try {
+    const data = await wpquery({
+      query: `
+        {
+          posts {
+            nodes {
+              slug
+              date
+              title
+              content(format: RENDERED)
+              excerpt
+              author {
+                node {
+                  name
+                }
+              }
+              featuredImage {
+                node {
+                  mediaItemUrl
+                  srcSet
+                  sizes
+                  altText
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    const typeData = data as GraphQLResponse;
+
+    return typeData.posts.nodes.map((post: any) => {
+      return {
+        params: { slug: post.slug },
+        props: { post },
+      };
+    });
+  } catch (error) {
+    console.error("Error al obtener los slugs:", error);
+    return {
+      params: [],
+      fallback: false,
+    };
+  }
+}
+
+const { post } = Astro.props;
 ---
 
-<!-- <Layout title={post.title.rendered}> -->
 <BlogLayout>
   <div class="blog-hero" slot="hero">
-    <Hero title1={post.title.rendered} haveButtons={false} url={image} />
+    <Hero
+      title1={post.title}
+      haveButtons={false}
+      url={post.featuredImage.node.mediaItemUrl}
+    />
   </div>
   <div slot="content" class="blog-details-wrap">
     <div class="details__content pb-30">
@@ -44,7 +117,7 @@ image = await getImage(post.featured_media);
           </li>
         </ul>
       </div>
-      <Fragment set:html={post.content.rendered} />
+      <Fragment set:html={post.content} />
       <div class="row">
         <!-- <div class="col-xl-12 col-md-12">
           <div class="post__tag">

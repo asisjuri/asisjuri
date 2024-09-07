@@ -1,6 +1,14 @@
 ---
 import { getTags } from "../services/blogwp";
-let { tags } = Astro.props;
+
+interface Tag {
+  id: number;
+  name: string;
+  count: number;
+  slug: string;
+}
+
+let { tags } = Astro.props as { tags: Tag[] };
 tags = await getTags();
 ---
 
@@ -10,7 +18,7 @@ tags = await getTags();
     {
       tags.map((tag) => (
         <a
-          href="#"
+          href={`/blog/etiqueta/${tag.slug}`}
           class="tag-cloud-link tag-link-28 tag-link-position-1"
           style="font-size: 8pt;"
           aria-label="app (1 item)"

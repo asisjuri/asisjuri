@@ -20,40 +20,40 @@ const navItems = [
 ];
 ---
 
-<div class="section">
-  <div class="logo-asis-1-parent">
-    <a href="/">
-      <img
-        class="logo-asis-1-icon"
-        alt="logo-asisjuridicaP"
-        src="/images/logoasis-1@2x.png"
-      />
-    </a>
-    <nav class="menu">
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div id="nav" class="menu__content">
-        {
-          navItems.map((item, index) => (
-            <a id={`item-${index}`} class="menu__item" href={item.path}>
-              {item.title}
-              {item.subItems && (
-                <div id={`submenu-${index}`} class="menu__sub">
-                  {item.subItems.map((subitem) => (
-                    <a href={subitem.path}>{subitem.title}</a>
-                  ))}
-                </div>
-              )}
-            </a>
-          ))
-        }
-      </div>
-    </nav>
-  </div>
+<!-- <div class="section"> -->
+<div class="logo-asis-1-parent">
+  <a href="/">
+    <img
+      class="logo-asis-1-icon"
+      alt="logo-asisjuridicaP"
+      src="/images/logoasis-1@2x.png"
+    />
+  </a>
+  <nav class="menu">
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div id="nav" class="menu__content">
+      {
+        navItems.map((item, index) => (
+          <a id={`item-${index}`} class="menu__item" href={item.path}>
+            {item.title}
+            {item.subItems && (
+              <div id={`submenu-${index}`} class="menu__sub">
+                {item.subItems.map((subitem) => (
+                  <a href={subitem.path}>{subitem.title}</a>
+                ))}
+              </div>
+            )}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
 </div>
+<!-- </div> -->
 
 <script is:inline>
   document.querySelectorAll(".menu__item").forEach((item, index) => {

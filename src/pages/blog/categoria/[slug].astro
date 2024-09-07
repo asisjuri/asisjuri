@@ -1,0 +1,120 @@
+---
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+import { wpquery } from "../../../graphql/wordPressQuery";
+import { formatDate } from "../../../utils/functions";
+import Hero from "../../../components/Hero.astro";
+
+interface Author {
+  node: {
+    name: string;
+  };
+}
+
+interface FeaturedImage {
+  node: {
+    mediaItemUrl: string;
+    altText: string;
+  };
+}
+
+interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: Author;
+  featuredImage: FeaturedImage;
+}
+
+interface Props {
+  posts: Post[];
+  cat: string;
+}
+
+export async function getStaticPaths() {
+  const { categories } = await wpquery({
+    query: `
+      {
+        categories {
+          nodes {
+            name
+            slug
+            posts {
+              nodes {
+                slug
+                title
+                excerpt
+                date
+                author {
+                  node {
+                    name
+                  }
+                }
+                featuredImage {
+                  node {
+                    mediaItemUrl
+                    altText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  return categories.nodes.map((category: any) => ({
+    params: { slug: category.slug },
+    props: {
+      posts: category.posts.nodes,
+      cat: category.name,
+    },
+  }));
+}
+
+const { posts, cat } = Astro.props as Props;
+---
+
+<BlogLayout>
+  <div class="blog-hero" slot="hero">
+    <Hero
+      title1={cat}
+      haveButtons={false}
+      url="/images/header-asisjuridica-home.jpg"
+    />
+  </div>
+  <div slot="content">
+    {
+      posts.map((post: any) => (
+        <div class="bsingle__post mb-50">
+          <div class="bsingle__post-thumb">
+            <img src={post.featuredImage.node.mediaItemUrl} alt="" />
+          </div>
+          <div class="bsingle__content">
+            <div class="admin">
+              <i class="fal fa-calendar-alt" /> {formatDate(post.date)}
+            </div>
+            <div class="meta-info">
+              <ul>
+                <li>
+                  <i class="fal fa-eye" /> 100 Views
+                </li>
+
+                <li>
+                  <i class="far fa-user" />
+                  por equipo Asisjuridica
+                </li>
+              </ul>
+            </div>
+
+            <h2>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
+            </h2>
+            <Fragment set:html={post.excerpt} />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BlogLayout>

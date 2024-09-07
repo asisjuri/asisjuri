@@ -1,0 +1,133 @@
+---
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+import { wpquery } from "../../../graphql/wordPressQuery";
+import { formatDate } from "../../../utils/functions";
+import Hero from "../../../components/Hero.astro";
+
+interface Author {
+  node: {
+    name: string;
+  };
+}
+
+interface FeaturedImage {
+  node: {
+    mediaItemUrl: string;
+    altText: string;
+  };
+}
+
+interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: Author;
+  featuredImage: FeaturedImage;
+}
+
+interface Tag {
+  name: string;
+  slug: string;
+  posts: {
+    nodes: Post[];
+  };
+}
+
+interface Props {
+  posts: Post[];
+  tagTitle: string;
+}
+
+export async function getStaticPaths() {
+  const { tags } = await wpquery({
+    query: `
+      {
+        tags {
+          nodes {
+            name
+            slug
+            posts {
+              nodes {
+                slug
+                title
+                excerpt
+                date
+                author {
+                  node {
+                    name
+                  }
+                }
+                featuredImage {
+                  node {
+                    mediaItemUrl
+                    altText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  return tags.nodes.map((tag: Tag) => ({
+    params: { slug: tag.slug },
+    props: {
+      posts: tag.posts.nodes,
+      tagTitle: tag.name, // Devuelve el nombre de la etiqueta
+    },
+  }));
+}
+
+const { posts, tagTitle } = Astro.props as Props;
+---
+
+<BlogLayout>
+  <div class="blog-hero" slot="hero">
+    <Hero
+      title1="Etiqueta"
+      title2={tagTitle}
+      haveButtons={false}
+      url="/images/header-asisjuridica-home.jpg"
+    />
+  </div>
+  <div slot="content">
+    {
+      posts.length > 0 ? (
+        posts.map((post: Post) => (
+          <div class="bsingle__post mb-50">
+            <div class="bsingle__post-thumb">
+              <img
+                src={post.featuredImage.node.mediaItemUrl}
+                alt={post.featuredImage.node.altText}
+              />
+            </div>
+            <div class="bsingle__content">
+              <div class="admin">
+                <i class="fal fa-calendar-alt" /> {formatDate(post.date)}
+              </div>
+              <div class="meta-info">
+                <ul>
+                  <li>
+                    <i class="fal fa-eye" /> 100 Views
+                  </li>
+                  <li>
+                    <i class="far fa-user" /> por {post.author.node.name}
+                  </li>
+                </ul>
+              </div>
+              <h2>
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h2>
+              <Fragment set:html={post.excerpt} />
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No hay posts disponibles con esta etiqueta.</p>
+      )
+    }
+  </div>
+</BlogLayout>

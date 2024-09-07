@@ -725,7 +725,6 @@ float: right;
 }
 .sticky-menu .second-menu::before{content: none;}
 .second-menu .main-menu ul li{margin-left: 40px;}
-.second-menu .main-menu ul li:first-child{}
 .second-menu .main-menu ul li a::before{content: none;}
 .second-header-btn .btn {
 	background: transparent;
@@ -855,9 +854,7 @@ float: right;
 {
     color: #162542;
 }
-.header-three{
-    
-}
+
 .header-three .menu-area {
 margin-bottom: -58px;
 }
@@ -878,9 +875,7 @@ margin-left: -25px;
 margin-top: 50px;
 margin-right: -227px;
 }
-.slider-four .slider-bg {
-  
-}
+
 .slider-four .slider-img {
 margin-left: 0;
 margin-top: 136px;
@@ -2057,13 +2052,7 @@ border-radius: 0;
 .second-services-content p {
 	margin-bottom: 0;
 }
-.second-services-content a {
-	/*font-size: 14px;
-	font-weight: 500;
-	color: #444d69;
-	position: relative;
-	transition: .5s;*/
-}
+
 
 .second-services-content a::after {
 	left: -40px;
@@ -2205,7 +2194,7 @@ padding-top: 30px;
 .services-box .ss-btn2{
     width: 60px;
     height: 60px;
-    background: #b68c5a0% 0% no-repeat padding-box;
+    background: #b68c5a 0% no-repeat padding-box;
     box-shadow: 0px 16px 32px #b68c5a33;
     display: none;
     color: #fff;
@@ -2586,34 +2575,8 @@ border: 2px solid #b68c5a;
 	width: 100%;
 	opacity: .65;
 }
-.video-img a {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	z-index: 9;
-	font-size: 14px;
-	color: #b68c5a;
-	height: 80px;
-	width: 80px;
-	text-align: center;
-	background: transparent linear-gradient(90deg, #b68c5a0%, #b68c5a100%) 0% 0% no-repeat padding-box;
-	border-radius: 50%;
-    padding: 25px;
-}
-.video-img a::before {
-	content: "";
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	height: 90px;
-	width: 90px;
-	background: transparent linear-gradient(90deg, #b68c5a0%, #b68c5a100%) 0% 0% no-repeat padding-box;
-	z-index: -1;
-	border-radius: 50%;
-	transform: translate(-50%,-50%);
-	animation: pulse-border 1500ms ease-out infinite;
-}
+
+
 @keyframes pulse-border {
   0% {
     transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
@@ -2870,8 +2833,7 @@ border: 2px solid #b68c5a;
     transition: .3s;
     
 }
- .team-active .slick-dots li.slick-active button {
-}
+
 .team-active .slick-dots li.slick-active button::before {
    
     opacity: 1;
@@ -3770,9 +3732,7 @@ margin-bottom: 15px;
   box-shadow: 2.5px 4.33px 15px 0px rgba(0, 0, 0, 0.09);
 }
 
-.faq-wrap .card:last-child {
-    
-}
+
 .faq-wrap .card-header h2 button::after {
 position: absolute;
 content: "\f00d";
@@ -3818,8 +3778,7 @@ line-height: 40px;
     transition: .3s;
     
 }
- .home-blog-active .slick-dots li.slick-active button {
-}
+
 .home-blog-active .slick-dots li.slick-active button::before {  
     opacity: 1;
 }
@@ -3864,9 +3823,7 @@ font-size: 24px;
     border-radius: 50%;
 }
 
-.home-blog-active .slick-prev {
 
-}
 
 .home-blog-active .slick-arrow.slick-next,.home-blog-active2 .slick-arrow.slick-next {
     right: -154px;
@@ -4119,6 +4076,10 @@ border-style: solid;
   border-width: 2px;
   border-color: rgb(243, 243, 243);
     position: relative;
+}
+
+.bsingle__content h2 a{
+    color: var(--dark);
 }
 .bsingle__content .admin {
 position: absolute;
@@ -5215,10 +5176,7 @@ width: auto !important;
     width: 100%;
 
 }
-.sidebar-widget .widget li.page_item_has_children,
- {
-    padding-bottom: 0;
-}
+
 .sidebar-widget .widget .children{
 	padding-left:15px;
 }
@@ -5232,12 +5190,7 @@ width: auto !important;
     display: block;
 
 }
-.sidebar-widget .widget .children li {
 
-}
-.sidebar-widget .widget .children .children li {
-
-}
 .sidebar-widget .widget li:last-child,.sidebar-widget .widget .children li:last-child,.sidebar-widget .widget .children .children li:last-child {
 	border-bottom:none;
 	padding-bottom:0;
@@ -5269,13 +5222,7 @@ margin-left: 0;
 width:85%;
 text-align:left;
 }
-.sidebar-widget .widget a:hover {
-    
-}
 
-.sidebar-widget .widget .widget_archive li:hover,.sidebar-widget .widget_archive li:hover{
-
-}
 .widget.widget_categories li a:hover {
     color: #777;
 }
@@ -5866,11 +5813,7 @@ pre cite {
 
 /* Here's the new CSS to add... */
 
-.admin-bar .menu-area {
-   
-}
-.admin-bar .second-header {
-}
+
 .admin-bar .sticky-menu {
   top: 32px;
   margin-top:0;
@@ -6586,14 +6529,6 @@ td.product-thumbnail img {
   width: 100%;
 }
 
-.coupon-info p.form-row input[type="submit"]:hover, p.checkout-coupon input[type="submit"]:hover {
-  background: #b68c5anone repeat scroll 0 0;
-}
-
-.coupon-info p.form-row input[type="checkbox"] {
-  position: relative;
-  top: 2px;
-}
 
 .form-row > label {
   margin-top: 15px;
@@ -7970,7 +7905,7 @@ display: inline-block;
     margin-top: 50px;
 }
 .process-area .col-lg-3.col-md-12:nth-child(2) .process-icon,.process-area .col-lg-3.col-md-12:nth-child(2) .no{
-    background: #b68c5a0% 0% no-repeat padding-box;
+    background: #b68c5a 0% no-repeat padding-box;
 }
 .process-area .col-lg-3.col-md-12:nth-child(3) .process-icon,.process-area .col-lg-3.col-md-12:nth-child(3) .no{
     background: #27ae61 0% 0% no-repeat padding-box;
@@ -9256,9 +9191,6 @@ background: #f6f6f6;
     margin-top: 30px;
 }
 
-.single-post .footer-widget{
-  
-}
 figure.aligncenter img {
     margin-bottom: 15px;
 }
@@ -9272,9 +9204,7 @@ figure img {
     height: auto;
 }
 
-.wpding .footer-widget{
 
-}
 .wpding .footer-widget .widget_categories ul li,.wpding .footer-widget .widget_archive ul li
 {
 	padding-bottom: 5px;
@@ -9700,9 +9630,7 @@ margin: auto;
         padding: 0;
     margin: 0;
 }
-.logo img{
 
-    }
 .f-widget-title img {
     max-width: inherit;
     width: 230px;
