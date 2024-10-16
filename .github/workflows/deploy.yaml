@@ -1,10 +1,9 @@
-name: Deploy Site
-
+name: Deploy Site on WordPress Post Update
 # Ejecuta el workflow cuando se dispare un evento repository_dispatch.
 on:
   workflow_dispatch:  # También puedes correrlo manualmente
   repository_dispatch:
-    types: [wordpress-publish]
+    types: [new_post, update_post]
 
 jobs:
   build-and-deploy:
