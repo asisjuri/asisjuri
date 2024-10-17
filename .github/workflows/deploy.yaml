@@ -26,8 +26,10 @@ jobs:
     - name: Deploy via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: ${{ secrets.FTP_SERVER }}
+        server: ${{ secrets.FTP_SERVER }}:21
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/ # El directorio generado después del build de Astro
+        protocol: ftps
+        local-dir: /dist/ # El directorio generado después del build de Astro
         server-dir: /public_html/  # La carpeta donde se va a desplegar en cPanel
+        debug: true
