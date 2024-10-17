@@ -29,5 +29,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: /dist  # El directorio generado después del build de Astro
+        local-dir: ./dist/ # El directorio generado después del build de Astro
         server-dir: /public_html  # La carpeta donde se va a desplegar en cPanel
