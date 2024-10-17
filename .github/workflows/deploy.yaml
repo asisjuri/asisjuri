@@ -5,6 +5,13 @@ on:
   repository_dispatch:
     types: [new_post, update_post]
 
+  push:
+    branches:
+      - main  # O la rama que estés usando
+
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
