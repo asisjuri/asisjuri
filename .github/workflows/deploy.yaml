@@ -22,14 +22,25 @@ jobs:
     - name: Build site
       run: npm run build
 
+    - name: Deploy dist folder to cPanel Git repository
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        cd dist
+        git init
+        git remote add web  # Reemplaza con la URL de tu repositorio en cPanel
+        git add .
+        git commit -m "Deploying site to cPanel"
+        git push -f cpanel main
+
     # 4. Desplegar los archivos generados al servidor usando FTP.
-    - name: Deploy via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        protocol: ftps
-        local-dir: ./dist/ # El directorio generado después del build de Astro
-        server-dir: /public_html/  # La carpeta donde se va a desplegar en cPanel
-        debug: true
+    # - name: Deploy via FTP
+    #   uses: SamKirkland/FTP-Deploy-Action@4.3.0
+    #   with:
+    #     server: ${{ secrets.FTP_SERVER }}
+    #     username: ${{ secrets.FTP_USERNAME }}
+    #     password: ${{ secrets.FTP_PASSWORD }}
+    #     protocol: ftps
+    #     local-dir: ./dist/ # El directorio generado después del build de Astro
+    #     server-dir: /public_html/  # La carpeta donde se va a desplegar en cPanel
+    #     debug: true
