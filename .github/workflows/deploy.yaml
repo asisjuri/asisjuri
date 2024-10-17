@@ -16,22 +16,22 @@ jobs:
 
     # 2. Instalar las dependencias del proyecto (en caso de usar npm).
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     # 3. Ejecutar el build del proyecto Astro.
     - name: Build site
       run: npm run build
 
-    - name: Deploy dist folder to cPanel Git repository
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        cd dist
-        git init
-        git remote add web  # Reemplaza con la URL de tu repositorio en cPanel
-        git add .
-        git commit -m "Deploying site to cPanel"
-        git push -f cpanel main
+    # - name: Deploy dist folder to cPanel Git repository
+    #   run: |
+    #     git config --global user.name "github-actions[bot]"
+    #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    #     cd dist
+    #     git init
+    #     git remote add web  # Reemplaza con la URL de tu repositorio en cPanel
+    #     git add .
+    #     git commit -m "Deploying site to cPanel"
+    #     git push -f cpanel main
 
     # 4. Desplegar los archivos generados al servidor usando FTP.
     # - name: Deploy via FTP

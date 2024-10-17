@@ -11,7 +11,7 @@ export default defineConfig({
   output: 'static',
 
   // Configura el output directory para los archivos generados
-  outDir: './dist',
+  outDir: './site',
   // Configura el build para optimizar y minificar archivos
   build: {
     minify: true,
