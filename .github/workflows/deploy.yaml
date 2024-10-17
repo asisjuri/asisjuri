@@ -14,10 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # Asegúrate de que esto sea Node.js 16
     # 2. Instalar las dependencias del proyecto (en caso de usar npm).
     - name: Install dependencies
       run: npm install
