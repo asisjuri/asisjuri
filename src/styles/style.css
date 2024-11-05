@@ -9395,6 +9395,8 @@ blockquote footer {
 .pagination-wrap .pagination {
 	display: block;
 	border-radius: unset;
+    margin-top: 10px;
+    margin-bottom: 80px;
 }
 .pagination-wrap .pagination li {
 	display: inline-block;
