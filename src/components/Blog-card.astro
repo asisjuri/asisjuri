@@ -1,6 +1,75 @@
 ---
-import { getPosts, getImage } from "../services/blogwp";
 import { formatDate } from "../utils/functions";
+
+interface FeaturedImageNode {
+  mediaItemUrl: string;
+  srcSet: string;
+  sizes: string;
+  altText: string;
+}
+interface FeaturedImage {
+  node: FeaturedImageNode;
+}
+
+interface AuthorNode {
+  name: string;
+}
+
+interface Author {
+  node: AuthorNode;
+}
+
+interface Post {
+  id: number;
+  date: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  featuredImage: FeaturedImage;
+  author: Author;
+}
+
+const { post }: { post: Post } = Astro.props; // Tipar las propiedades recibidas
+---
+
+<div class="bsingle__post mb-50">
+  <div class="bsingle__post-thumb">
+    <img src={post.featuredImage.node.mediaItemUrl} alt={post.title} />
+  </div>
+  <div class="bsingle__content">
+    <div class="admin">
+      <i class="fal fa-calendar-alt"></i>
+      {formatDate(post.date)}
+    </div>
+    <div class="meta-info">
+      <ul>
+        <li>
+          <i class="fal fa-eye"></i> 100 Views
+        </li>
+        <li>
+          <i class="far fa-user"></i>
+          por equipo Asisjuridica
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <a href={`/blog/${post.slug}`}>{post.title}</a>
+    </h2>
+    <Fragment set:html={post.excerpt} />
+  </div>
+</div>
+
+<!-- ---
+import { getImage, postsPerPage } from "../services/blogwp";
+import { formatDate } from "../utils/functions";
+
+const perPage = 4; // Número de posts por página
+
+type Params = {
+  params: {
+    page: string;
+  };
+};
 
 type Post = {
   id: number;
@@ -12,13 +81,25 @@ type Post = {
   image?: string;
 };
 
-let posts: Post[] = [];
-let isLoading = true;
-let error = null;
+// Función para obtener el total de posts y generar rutas para cada página
+export async function getStaticPaths() {
+  const { totalPosts } = await postsPerPage(1, Number.MAX_SAFE_INTEGER);
+  const totalPages = Math.ceil(totalPosts / perPage);
 
-try {
-  posts = await getPosts();
+  // Generar rutas para cada página
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() }, // Rutas como { page: "1" }, { page: "2" }, etc.
+  }));
+}
+// Función para obtener datos de cada página
+export async function getStaticProps({ params }: Params) {
+  const currentPage = Number(params.page) || 1; // Convertir a número
+  const { posts: allPosts } = await postsPerPage(1, Number.MAX_SAFE_INTEGER);
 
+  const startIndex = (currentPage - 1) * perPage;
+  const posts = allPosts.slice(startIndex, startIndex + perPage);
+
+  // Cargar imágenes
   for (const post of posts) {
     try {
       const image = await getImage(post.featured_media);
@@ -30,58 +111,74 @@ try {
       );
     }
   }
-} catch (err: any) {
-  error = err.message;
-} finally {
-  isLoading = false;
-}
 
-// Definir el número de posts por página
+  return {
+    props: {
+      posts,
+      currentPage,
+      totalPages: Math.ceil(allPosts.length / perPage), // Número total de páginas
+    },
+  };
+}
+const {
+  posts,
+  currentPage,
+  totalPages,
+}: { posts: Post[]; currentPage: number; totalPages: number } = Astro.props;
 ---
 
-{isLoading && <p>Loading...</p>}
-
-{error && <p>Error: {error}</p>}
-
+{posts.length === 0 && <p>No hay posts disponibles.</p>}
 {
-  !isLoading && !error && (
-    <div>
-      {posts.map((post: any) => (
-        <div class="bsingle__post mb-50">
-          <div class="bsingle__post-thumb">
-            <img src={post.image} alt="" />
-          </div>
-          <div class="bsingle__content">
-            <div class="admin">
-              <i class="fal fa-calendar-alt" /> {formatDate(post.date)}
-            </div>
-            <div class="meta-info">
-              <ul>
-                <li>
-                  <i class="fal fa-eye" /> 100 Views
-                </li>
-
-                <li>
-                  <i class="far fa-user" />
-                  por equipo Asisjuridica
-                </li>
-              </ul>
-            </div>
-
-            <h2>
-              <a href={`/blog/${post.slug}`}>{post.title.rendered}</a>
-            </h2>
-            <Fragment set:html={post.excerpt.rendered} />
-          </div>
+  posts.map((post) => (
+    <div class="bsingle__post mb-50">
+      <div class="bsingle__post-thumb">
+        <img src={post.image} alt={post.title.rendered} />
+      </div>
+      <div class="bsingle__content">
+        <div class="admin">
+          <i class="fal fa-calendar-alt" /> {formatDate(post.date)}
         </div>
-      ))}
+        <div class="meta-info">
+          <ul>
+            <li>
+              <i class="fal fa-eye" /> 100 Views
+            </li>
+            <li>
+              <i class="far fa-user" />
+              por equipo Asisjuridica
+            </li>
+          </ul>
+        </div>
+
+        <h2>
+          <a href={`/blog/${post.slug}`}>{post.title.rendered}</a>
+        </h2>
+        <Fragment set:html={post.excerpt.rendered} />
+      </div>
     </div>
-  )
+  ))
 }
-<!-- <div class="pagination">
-  {currentPage > 1 && <a href={`/page/${currentPage - 1}`}>Anterior</a>}
-  {
-    currentPage < totalPages && (
-      <a href={`/page/${currentPage + 1}`}>Siguiente</a>
-    )
-  } -->
+
+<div class="pagination-wrap">
+  <nav>
+    <ul class="pagination">
+      <li class="page-item">
+        <a href={currentPage > 1 ? `?page=$currentPage - 1}` : "#"}>
+          <i class="fas fa-angle-double-left"></i>
+        </a>
+      </li>
+      {
+        Array.from({ length: totalPages }, (_, i) => (
+          <li class={`page-item ${currentPage === i + 1 ? "active" : ""}`}>
+            <a href={`?page=${i + 1}`}>{i + 1}</a>
+          </li>
+        ))
+      }
+      <li class="page-item">
+        <a href={currentPage < totalPages ? `?page=${currentPage + 1}` : "#"}>
+          <i class="fas fa-angle-double-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div> -->

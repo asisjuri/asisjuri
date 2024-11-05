@@ -249,9 +249,13 @@ z-index: -1;
 }
 
 .video-icon {
-  width: 100%;
+  width: 90%;
+  position: absolute;
   object-fit: contain;
+  bottom: 0;
+  left: 60px;
 }
+
 
 .nst {
  align-items: flex-end;
@@ -873,7 +877,7 @@ z-index: -1;
 .col2 {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 65%;
 }
 
 .col8 {

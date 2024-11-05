@@ -1,36 +1,3 @@
----
-import BlogLayout from "../../layouts/BlogLayout.astro";
-import Hero from "../../components/Hero.astro";
-import BlogCard from "../../components/Blog-card.astro";
----
-
-<BlogLayout>
-  <div slot="hero">
-    <Hero
-      title1="Blog"
-      subTitle="Soluciones jurídicas personalizadas"
-      haveButtons={false}
-      url="/images/header-asisjuridica-home.jpg"
-    />
-  </div>
-  <div slot="content">
-    <BlogCard />
-    <div class="pagination-wrap">
-      <nav>
-        <ul class="pagination">
-          <li class="page-item">
-            <a href="#"><i class="fas fa-angle-double-left"></i></a>
-          </li>
-          <li class="page-item active"><a href="#">1</a></li>
-          <li class="page-item"><a href="#">2</a></li>
-          <li class="page-item"><a href="#">3</a></li>
-          <li class="page-item"><a href="#">...</a></li>
-          <li class="page-item"><a href="#">10</a></li>
-          <li class="page-item">
-            <a href="#"><i class="fas fa-angle-double-right"></i></a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</BlogLayout>
+<head>
+  <meta http-equiv="refresh" content="0; url=/blog/1" />
+</head>

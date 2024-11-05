@@ -10,6 +10,7 @@ interface Category {
 
 let { cat } = Astro.props as { cat: Category[] };
 cat = await getCategories();
+// console.log(cat);
 ---
 
 <section id="categories-1" class="widget widget_categories">

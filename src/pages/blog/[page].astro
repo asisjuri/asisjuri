@@ -1,0 +1,161 @@
+---
+// Importa los módulos necesarios
+import { wpquery } from "../../graphql/wordPressQuery";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import Hero from "../../components/Hero.astro";
+import BlogCard from "../../components/Blog-card.astro";
+
+// Interfaces para la respuesta de GraphQL
+interface FeaturedImageNode {
+  mediaItemUrl: string;
+  srcSet: string;
+  sizes: string;
+  altText: string;
+}
+
+interface FeaturedImage {
+  node: FeaturedImageNode;
+}
+
+interface AuthorNode {
+  name: string;
+}
+
+interface Author {
+  node: AuthorNode;
+}
+
+interface PostNode {
+  id: number;
+  date: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  featuredImage: FeaturedImage;
+  author: Author;
+}
+
+interface Posts {
+  nodes: PostNode[];
+}
+
+interface GraphQLResponse {
+  posts: Posts;
+}
+
+// Configuración de paginación
+
+export async function getStaticPaths() {
+  const perPage = 4;
+  try {
+    const data = await wpquery({
+      query: `
+        {
+          posts {
+            nodes {
+              slug
+              date
+              title
+              content(format: RENDERED)
+              excerpt
+              author {
+                node {
+                  name
+                }
+              }
+              featuredImage {
+                node {
+                  mediaItemUrl
+                  srcSet
+                  sizes
+                  altText
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    const typeData = data as GraphQLResponse;
+    const entries = typeData.posts.nodes;
+    const totalPosts = entries.length;
+    const totalPages = Math.ceil(totalPosts / perPage);
+
+    // Genera las rutas
+    const paths = Array.from({ length: totalPages }, (_, i) => ({
+      params: { page: (i + 1).toString() },
+    }));
+
+    // Retorna las rutas y los posts para cada página
+    return paths.map(({ params }) => {
+      const currentPage = Number(params.page);
+      const startIndex = (currentPage - 1) * perPage;
+      const posts = entries.slice(startIndex, startIndex + perPage);
+
+      return {
+        params,
+        props: {
+          posts,
+          currentPage,
+          totalPages,
+        },
+      };
+    });
+  } catch (error) {
+    console.error("Error al obtener las rutas:", error);
+    return {
+      params: [],
+      fallback: false,
+    };
+  }
+}
+const { posts, currentPage, totalPages } = Astro.props as {
+  posts: PostNode[];
+  currentPage: number;
+  totalPages: number;
+};
+// Verifica que la estructura de posts sea correcta
+---
+
+<BlogLayout>
+  <div slot="hero">
+    <Hero
+      title1="Blog"
+      subTitle="Soluciones jurídicas personalizadas"
+      haveButtons={false}
+      url="/images/header-asisjuridica-home.jpg"
+    />
+  </div>
+  <div slot="content">
+    {posts.length === 0 && <p>No hay posts disponibles.</p>}
+    {posts.map((post) => <BlogCard post={post} key={post.id} />)}
+
+    <!-- Paginación -->
+    <div class="pagination-wrap">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item">
+            <a href={currentPage > 1 ? `/blog/${currentPage - 1}` : "#"}>
+              <i class="fas fa-angle-double-left"></i>
+            </a>
+          </li>
+          {
+            Array.from({ length: totalPages }, (_, i) => (
+              <li class={`page-item ${currentPage === i + 1 ? "active" : ""}`}>
+                <a href={`/blog/${i + 1}`}>{i + 1}</a>
+              </li>
+            ))
+          }
+          <li class="page-item">
+            <a
+              href={currentPage < totalPages ? `/blog/${currentPage + 1}` : "#"}
+            >
+              <i class="fas fa-angle-double-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</BlogLayout>
